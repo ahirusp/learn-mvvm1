@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MvvmCalc.Common;
 using MvvmCalc.Model;
@@ -10,8 +11,8 @@ namespace MvvmCalc.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private double lhs;
-        private double rhs;
+        private string lhs;
+        private string rhs;
         private double answer;
 
         private CalculateTypeViewModel selectedCalculateType;
@@ -22,6 +23,9 @@ namespace MvvmCalc.ViewModel
             this.CalculateTypes = CalculateTypeViewModel.Create();
             this.SelectedCalculateType = this.CalculateTypes.First();
 
+            // 入力値の検証を行う
+            this.Lhs = string.Empty;
+            this.Rhs = string.Empty;
         }
 
         /// <summary>
@@ -45,12 +49,20 @@ namespace MvvmCalc.ViewModel
         /// <summary>
         /// 計算の左辺値
         /// </summary>
-        public double Lhs
+        public string Lhs
         {
             get { return this.lhs; }
             set
             {
                 this.lhs = value;
+                if (!this.IsDouble(value))
+                {
+                    this.SetError("Lhs", "数字を入力してください");
+                }
+                else
+                {
+                    this.ClearError("Lhs");
+                }
                 this.RaisePropertyChanged("Lhs");
             }
         }
@@ -58,12 +70,20 @@ namespace MvvmCalc.ViewModel
         /// <summary>
         /// 計算の右辺値
         /// </summary>
-        public double Rhs
+        public string Rhs
         {
             get { return this.rhs; }
             set
             {
                 this.rhs = value;
+                if (!this.IsDouble(value))
+                {
+                    this.SetError("Rhs", "数字を入力してください");
+                }
+                else
+                {
+                    this.ClearError("Rhs");
+                }
                 this.RaisePropertyChanged("Rhs");
             }
         }
@@ -103,8 +123,8 @@ namespace MvvmCalc.ViewModel
         /// <returns>実行可能であればtrue</returns>
         private bool CanCalculateExecute()
         {
-            // 現在選択されている計算方法がNone以外ならコマンドの実行が可能
-            return this.SelectedCalculateType.CalculateType != CalculateType.None;
+            // 現在選択されている計算方法がNone以外かつ入力エラーがなければコマンドの実行が可能
+            return this.SelectedCalculateType.CalculateType != CalculateType.None && !this.HasError;
         }
 
         /// <summary>
@@ -114,7 +134,16 @@ namespace MvvmCalc.ViewModel
         {
             // 現在の入力値を元に計算を行う
             var calc = new Calculator();
-            this.Answer = calc.Execute(this.Lhs, this.Rhs, this.SelectedCalculateType.CalculateType);
+            this.Answer = calc.Execute(
+                 Double.Parse(this.Lhs),
+                 Double.Parse(this.Rhs),
+                 this.SelectedCalculateType.CalculateType);
+        }
+
+        private bool IsDouble(string value)
+        {
+            var temp = default (double);
+            return double.TryParse(value, out temp);
         }
     }
 }
