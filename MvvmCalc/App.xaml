@@ -5,7 +5,7 @@
              Startup="App_OnStartup">
     <Application.Resources>
          <DataTemplate DataType="{x:Type vm:CalculateTypeViewModel}">
-             <TextBlock Text="{Binding Label}"></TextBlock>
+             <TextBlock Text="{Binding Label}" />
          </DataTemplate>
     </Application.Resources>
 </Application>
