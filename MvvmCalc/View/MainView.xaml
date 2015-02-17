@@ -31,9 +31,9 @@
         <Label Content="右辺値：" Grid.Row="2" />
         
         <!--入力項目-->
-        <TextBox Text="{Binding Path=Lhs, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" />
+        <TextBox Text="{Binding Path=Lhs, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Column="1" />
         <ComboBox ItemsSource="{Binding Path=CalculateTypes}" SelectedItem="{Binding Path=SelectedCalculateType}" SelectedIndex="0" Grid.Column="1" Grid.Row="1" />
-        <TextBox Text="{Binding Path=Rhs, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" />
+        <TextBox Text="{Binding Path=Rhs, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Grid.Column="1" Grid.Row="2" />
         <Button Content="計算実行" Command="{Binding Path=CalculateCommand}" Grid.Row="3" Grid.ColumnSpan="2" />
         <TextBlock Text="{Binding Path=Answer}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center"></TextBlock>
     </Grid>
