@@ -1,0 +1,36 @@
+﻿<Window x:Class="MvvmCalc.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="簡単電卓"
+        Width="300"
+        SizeToContent="Height"
+        SnapsToDevicePixels="True">
+    <Grid>
+        <!-- 列の定義 -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!--行の定義-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <!--ラベル-->
+        <Label Content="左辺値：" />
+        <Label Content="計算方法：" Grid.Row="1" />
+        <Label Content="右辺値：" Grid.Row="2" />
+        
+        <!--入力項目-->
+        <TextBox Text="ToDo. Binding here" Grid.Column="1" />
+        <ComboBox Grid.Column="1" Grid.Row="1" />
+        <TextBox Text="ToDo. Binding here" Grid.Column="1" Grid.Row="2" />
+        <Button Content="計算実行" Grid.Row="3" Grid.ColumnSpan="2"></Button>
+        <TextBlock Text="ToDo. Binding here" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center"></TextBlock>
+    </Grid>
+</Window>
