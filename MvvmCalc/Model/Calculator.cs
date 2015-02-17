@@ -11,7 +11,7 @@ namespace MvvmCalc.Model
         /// <summary>
         /// 計算方法を表すCalculateTypeと実際の処理のマップ
         /// </summary>
-        private  static readonly Dictionary<CalculateType, Func<double, double, double>> CalcMap =
+        private static readonly Dictionary<CalculateType, Func<double, double, double>> CalcMap =
             new Dictionary<CalculateType, Func<double, double, double>>
         {
             //未指定
@@ -31,19 +31,19 @@ namespace MvvmCalc.Model
 
             //引き算
             {
-                CalculateType.Add,
+                CalculateType.Sub,
                 (x, y) => x - y
             },
 
             //掛け算
             {
-                CalculateType.Add,
+                CalculateType.Mul,
                 (x, y) => x * y
             },
 
             //割り算
             {
-                CalculateType.Add,
+                CalculateType.Div,
                 (x, y) => x / y
             }
         };
