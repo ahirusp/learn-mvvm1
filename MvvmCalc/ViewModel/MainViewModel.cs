@@ -15,6 +15,8 @@ namespace MvvmCalc.ViewModel
         private string rhs;
         private double answer;
 
+        private Messenger errorMessenger = new Messenger();
+
         private CalculateTypeViewModel selectedCalculateType;
         private DelegateCommand calculateCommand;
 
@@ -138,12 +140,62 @@ namespace MvvmCalc.ViewModel
                  Double.Parse(this.Lhs),
                  Double.Parse(this.Rhs),
                  this.SelectedCalculateType.CalculateType);
+
+            if (IsInvalidAnswer())
+            {
+                // 計算結果が実数の範囲から外れている場合はViewに通知する
+                this.ErrorMessenger.Raise(
+                    new Message("計算結果が実数の範囲を超えました。入力値を初期化しますか？"),
+                    m =>
+                    {
+                        // Viewから入力を初期化すると指定された場合はプロパティの初期化を行う
+                        if (!(bool) m.Response)
+                        {
+                            return;
+                        }
+
+                        InititalizeProperties();
+                    });
+            }
         }
 
+        /// <summary>
+        /// プロパティの初期化を行う。
+        /// </summary>
+        private void InititalizeProperties()
+        {
+            this.Lhs = string.Empty;
+            this.Rhs = string.Empty;
+            this.Answer = default (double);
+            this.SelectedCalculateType = this.CalculateTypes.First();
+        }
+
+        /// <summary>
+        /// Answerが有効な実装値か確認する。
+        /// </summary>
+        /// <returns>有効な実数の範囲にある場合はtrueを返す</returns>
+        private bool IsInvalidAnswer()
+        {
+            return double.IsInfinity(this.Answer) || double.IsNaN(this.Answer);
+        }
+
+        /// <summary>
+        /// valueがdouble型に変換できるかどうか検証します。
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>doubleに変換できる場合はtrueを返す</returns>
         private bool IsDouble(string value)
         {
             var temp = default (double);
             return double.TryParse(value, out temp);
+        }
+
+        /// <summary>
+        /// 計算結果にエラーがあったことを通知するメッセージを送信するメッセンジャーを取得する
+        /// </summary>
+        public Messenger ErrorMessenger
+        {
+            get { return this.errorMessenger; }
         }
     }
 }

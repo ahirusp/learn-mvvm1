@@ -17,7 +17,7 @@ namespace MvvmCalc.Common
         /// </summary>
         /// <param name="message">メッセージ</param>
         /// <param name="callback">コールバック</param>
-        protected virtual void Raise(Message message, Action<Message> callback)
+        public void Raise(Message message, Action<Message> callback)
         {
             var h = this.Raised;
             if (h != null)

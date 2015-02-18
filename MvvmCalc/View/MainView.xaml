@@ -2,6 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:MvvmCalc.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:common="clr-namespace:MvvmCalc.Common"
         Title="簡単電卓"
         Width="300"
         SizeToContent="Height"
@@ -9,6 +12,13 @@
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
+    
+    <i:Interaction.Triggers>
+        <common:MessageTrigger SourceObject="{Binding Path=ErrorMessenger}">
+            <common:ConfirmAction />
+        </common:MessageTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <!-- 列の定義 -->
         <Grid.ColumnDefinitions>
