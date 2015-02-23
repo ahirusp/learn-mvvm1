@@ -14,3 +14,15 @@ https://code.msdn.microsoft.com/windowsdesktop/MVVM-ViewModelView-d1c0714d
 - Behaviorを使うには - http://okazuki.hatenablog.com/entry/20100817/1282044737
   - System.Windows.Interactivity.dll
   - Microsoft.Expression.Interactions.dll
+
+## MVVM入門 その４「ライブラリを使おう」
+https://code.msdn.microsoft.com/windowsdesktop/MVVM-0675495f
+
+- Prism
+- MVVM Light Toolkit
+
+## MVVM入門 その５「ライブラリを使おう２」
+https://code.msdn.microsoft.com/windowsdesktop/MVVM-c2d5e908
+
+- Livet
+- KinkumaFramework
