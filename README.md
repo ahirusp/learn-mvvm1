@@ -20,6 +20,7 @@ https://code.msdn.microsoft.com/windowsdesktop/MVVM-0675495f
 
 - Prism
 - MVVM Light Toolkit
+  - コンボボックスの変更が反映されないので、GalaSoft.MvvmLight.CommandWpf.RelayCommandを使うように変更
 
 ## MVVM入門 その５「ライブラリを使おう２」
 https://code.msdn.microsoft.com/windowsdesktop/MVVM-c2d5e908
